@@ -62,6 +62,28 @@ class Solution:
             # If the difference is not in prevMap, add the current number to prevMap with its index
             prevMap[n] = i
 
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        # Create a defaultdict to store anagrams as values grouped by their character count tuple as keys
+        ans = collections.defaultdict(list)
+
+        # Iterate through the list of input strings
+        for s in strs:
+            # Initialize a list 'count' to store the frequency of characters (a-z) in the current string
+            count = [0] * 26
+            
+            # Iterate through each character 'c' in the current string 's'
+            for c in s:
+                # Increment the count of the corresponding character's position in the 'count' list
+                count[ord(c) - ord("a")] += 1
+            
+            # Convert the 'count' list into a tuple so it can be used as a dictionary key
+            # Add the current string 's' to the list associated with the tuple key in 'ans'
+            ans[tuple(count)].append(s)
+        
+        # Return the grouped anagrams as a list of lists (values of the 'ans' dictionary)
+        return ans.values()
+
+
 
 
 solution_instance = Solution()
