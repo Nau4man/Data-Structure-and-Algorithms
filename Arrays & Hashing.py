@@ -43,6 +43,26 @@ class Solution:
         # Compare the two dictionaries to check if character frequencies match
         return countS == countT
 
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # Create a dictionary to store previously encountered values as keys and their indices as values
+        prevMap = {}  # val -> index
+
+        # Iterate through the list of numbers along with their indices
+        for i, n in enumerate(nums):
+            # Calculate the difference between the target value and the current number
+            diff = target - n
+            
+            # Check if the difference (complement) exists in the prevMap dictionary
+            if diff in prevMap:
+                # If the difference is found in prevMap, it means we have found a pair of indices
+                # whose corresponding values add up to the target
+                # Return the indices of the current number and the one in prevMap
+                return [prevMap[diff], i]
+            
+            # If the difference is not in prevMap, add the current number to prevMap with its index
+            prevMap[n] = i
+
+
 
 solution_instance = Solution()
 
