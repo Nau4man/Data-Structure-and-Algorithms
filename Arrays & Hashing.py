@@ -19,9 +19,34 @@ class Solution:
         
         return False   # If the loop completes without finding any duplicates, return False
 
+    
+    def isAnagram(self, s: str, t: str) -> bool:
+        # Check if the lengths of the input strings are different
+        if len(s) != len(t):
+            return False  # If lengths are different, they can't be anagrams
+
+        # Initialize dictionaries to count character frequencies in each string
+        countS, countT = {}, {}
+
+        # Iterate through the characters in the strings
+        for i in range(len(s)):
+            # For string 's':
+            # Increment the count of the current character by 1 if it's already in the dictionary,
+            # otherwise set its count to 1.
+            countS[s[i]] = 1 + countS.get(s[i], 0)
+            
+            # For string 't':
+            # Increment the count of the current character by 1 if it's already in the dictionary,
+            # otherwise set its count to 1.
+            countT[t[i]] = 1 + countT.get(t[i], 0)
+            
+        # Compare the two dictionaries to check if character frequencies match
+        return countS == countT
+
 
 solution_instance = Solution()
 
 
 result  = solution_instance.containsDuplicate([1,2,3,1])
 print(result)
+
