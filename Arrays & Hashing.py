@@ -83,6 +83,34 @@ class Solution:
         # Return the grouped anagrams as a list of lists (values of the 'ans' dictionary)
         return ans.values()
 
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # Create a dictionary to store the frequency of each number in 'nums'
+        count = {}
+        # Create a list of lists 'freq', where each sublist will contain numbers with the same frequency
+        freq = [[] for i in range(len(nums) + 1)]
+
+        # Count the frequency of each number in 'nums' and store it in the 'count' dictionary
+        for n in nums:
+            count[n] = 1 + count.get(n, 0)
+
+        # Populate the 'freq' list of lists with numbers grouped by their frequencies
+        for n, c in count.items():
+            freq[c].append(n)
+
+        # Initialize the result list to store the top k frequent numbers
+        res = []
+
+        # Iterate through the 'freq' list in reverse order (higher frequencies first)
+        for i in range(len(freq) - 1, 0, -1):
+            # Iterate through the numbers in the current frequency group
+            for n in freq[i]:
+                # Append the number to the 'res' list
+                res.append(n)
+                # Check if the desired k elements have been found
+                if len(res) == k:
+                    return res  # Return the result list when k elements are collected
+
+
 
 
 
