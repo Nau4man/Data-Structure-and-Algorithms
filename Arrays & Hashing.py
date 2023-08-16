@@ -109,6 +109,26 @@ class Solution:
                 # Check if the desired k elements have been found
                 if len(res) == k:
                     return res  # Return the result list when k elements are collected
+    
+    
+    
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # Create a list 'res' initialized with all 1s to store the final results
+        res = [1] * (len(nums))
+
+        # Calculate the prefix product and store it in the 'res' list
+        prefix = 1
+        for i in range(len(nums)):
+            res[i] = prefix  # Store the product of all elements to the left of index 'i'
+            prefix *= nums[i]  # Update the prefix product for the next iteration
+
+        # Calculate the postfix product and update the 'res' list
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix  # Multiply the product of all elements to the right of index 'i'
+            postfix *= nums[i]  # Update the postfix product for the next iteration
+        
+        return res  # Return the final product except self for each element
 
 
 
